@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Court {
     private Long courtId;
 
     //TODO:maybe should be separated into street/city/zip code?
-    // alternative : create a address class (something to think about)
+    // alternative : create an address class (something to think about)
+    @NotBlank
     private String address;
 }
