@@ -23,8 +23,9 @@ public class Court {
     )
     private Long courtId;
 
-    //TODO:maybe should be separated into street/city/zip code?
-    // alternative : create an address class (something to think about)
     @NotBlank
+    private String name;
+
     private String address;
+
 }
