@@ -21,8 +21,45 @@ public class Case {
     )
     private Long caseId;
 
-//    private Client client;
-//    private Court court;
-//    private Judge judge;
-//    private Lawyer lawyer;
+    private String description;
+
+    @ManyToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+            name = "client_id",
+            referencedColumnName = "clientId"
+    )
+    private Client client;
+
+    @ManyToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+            name = "court_id",
+            referencedColumnName = "courtId"
+    )
+    private Court court;
+
+    @ManyToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+            name = "judge_id",
+            referencedColumnName = "judgeId"
+    )
+    private Judge judge;
+
+    @ManyToOne(
+            cascade = CascadeType.ALL
+
+    )
+    @JoinColumn(
+            name = "lawyer_id",
+            referencedColumnName = "lawyerId"
+    )
+    private Lawyer lawyer;
 }
