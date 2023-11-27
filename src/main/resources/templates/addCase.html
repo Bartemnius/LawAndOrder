@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Case</title>
+
+    <!--    bootstrap included-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h2 align="center">Add new case to database</h2>
+    <form th:action="@{/addCase}" th:object="${newCase}" method="post" >
+        <input type="text" th:field="*{description}" placeholder="Case description" class="form-control mb-2" maxlength="50"/>
+<!--choose from clients-->
+        <select class="form-select" th:field="*{client}">
+            <option value="">Choose client..</option>
+            <option th:each="customer: ${clients}" th:value="${customer.clientId}" th:text="${customer.firstName + ' ' + customer.lastName}" />
+        </select>
+<!--choose from courts-->
+        <select class="form-select" th:field="*{court}">
+            <option value="">Choose court..</option>
+            <option th:each="court: ${courts}" th:value="${court.courtId}" th:text="${court.name}" />
+        </select>
+<!--choose from judges-->
+        <select class="form-select" th:field="*{judge}">
+            <option value="">Choose judge..</option>
+            <option th:each="judge: ${judges}" th:value="${judge.judgeId}" th:text="${judge.firstName + ' ' + judge.lastName}" />
+        </select>
+<!--choose from lawyers-->
+        <select class="form-select" th:field="*{lawyer}">
+            <option value="">Choose lawyer..</option>
+            <option th:each="lawyer: ${lawyers}" th:value="${lawyer.lawyerId}" th:text="${lawyer.firstName + ' ' + lawyer.lastName + ' ' +  lawyer.company}" />
+        </select>
+
+
+        <input type="hidden" th:field="*{caseId}">
+        <button class="btn btn-primary mt-2" type="submit">Save Case</button>
+    </form>
+    <a th:href="@{/}" class="btn btn-secondary mt-2">Back to cases list</a>
+</div>
+</body>
+</html>
