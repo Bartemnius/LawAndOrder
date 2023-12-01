@@ -23,6 +23,7 @@ public class Court {
     )
     private Long courtId;
 
+    @NotBlank
     private String name;
 
     private String address;
