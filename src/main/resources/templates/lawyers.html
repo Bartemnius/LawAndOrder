@@ -26,6 +26,7 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Company</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,6 +34,10 @@
                         <td th:text="${lawyer.firstName}"></td>
                         <td th:text="${lawyer.lastName}"></td>
                         <td th:text="${lawyer.company}"></td>
+                        <td>
+                            <a class="btn btn-primary" th:href="@{/updateLawyer(lawyerId=${lawyer.lawyerId})}">Update</a>
+                            <a class="btn btn-danger" th:href="@{/deleteLawyer(lawyerId=${lawyer.lawyerId})}">Delete</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

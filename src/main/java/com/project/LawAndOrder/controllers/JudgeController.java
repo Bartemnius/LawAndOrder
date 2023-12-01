@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  This is a judge controller page.
@@ -22,6 +24,8 @@ import java.util.List;
 public class JudgeController {
      @Autowired
      JudgeRepository judgeRepository;
+     @Autowired
+     CaseRepository caseRepository;
 
      @GetMapping({"/judges"})
      public ModelAndView getMainPage() {
@@ -45,6 +49,22 @@ public class JudgeController {
          return "redirect:/judges";
      }
 
+    @GetMapping("/deleteJudge")
+    public String deleteJudge(@RequestParam Long judgeId) {
+        Optional<Judge> judge = judgeRepository.findById(judgeId);
+        List<Case> cases = caseRepository.findAll();
+        cases.forEach(aCase -> {
+            if(aCase.getJudge() == judge.get()) aCase.setJudge(null);
+        });
+        judgeRepository.deleteById(judgeId);
+        return "redirect:/judges";
+    }
 
-
+    @GetMapping("/updateJudge")
+    public ModelAndView updateJudge(@RequestParam Long judgeId) {
+        Judge newJudge = judgeRepository.findById(judgeId).get();
+        ModelAndView mav = new ModelAndView("addJudge");
+        mav.addObject("newJudge", newJudge);
+        return mav;
+    }
 }

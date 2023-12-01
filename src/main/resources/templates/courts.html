@@ -25,12 +25,17 @@
                     <tr>
                         <th>Court Name</th>
                         <th>Court Address</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="court : ${courtList}">
                         <td th:text="${court.name}"></td>
                         <td th:text="${court.address}"></td>
+                        <td>
+                            <a class="btn btn-primary" th:href="@{/updateCourt(courtId=${court.courtId})}">Update</a>
+                            <a class="btn btn-danger" th:href="@{/deleteCourt(courtId=${court.courtId})}">Delete</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

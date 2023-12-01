@@ -30,6 +30,7 @@
                         <th>Court</th>
                         <th>Judge</th>
                         <th>Lawyer</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,11 @@
                         <td th:text="${case.court}?  ${case.court.name} : 'There is no court selected'"></td>
                         <td th:text="${case.judge}? ${case.judge.firstName + ' ' + case.judge.lastName} : 'There is no judge assigned'"></td>
                         <td th:text="${case.lawyer}? ${case.lawyer.firstName + ' ' + case.lawyer.lastName} : 'There is no lawyer assigned'"></td>
+                        <td>
+                            <a class="btn btn-success" th:href="@{/doneCase(caseId=${case.caseId})}">Done</a>
+                            <a class="btn btn-primary" th:href="@{/updateCase(caseId=${case.caseId})}">Update</a>
+                            <a class="btn btn-danger" th:href="@{/deleteCase(caseId=${case.caseId})}">Delete</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

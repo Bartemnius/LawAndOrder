@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class CaseController {
     @Autowired
     LawyerRepository lawyerRepository;
 
-    @GetMapping({"/", "/home"})
+    @GetMapping({"/", "/home", "cases"})
     public ModelAndView getMainPage() {
         List<Case> caseList = caseRepository.findAll();
         ModelAndView mav = new ModelAndView("home");
@@ -58,8 +59,20 @@ public class CaseController {
     @PostMapping("/addCase")
     public String saveCase(@ModelAttribute Case newCase) {
         caseRepository.save(newCase);
-        return "redirect:/";
+        return "redirect:/cases";
     }
 
+    @GetMapping("/deleteCase")
+    public String deleteClient(@RequestParam Long caseId) {
+        caseRepository.deleteById(caseId);
+        return "redirect:/cases";
+    }
 
+    @GetMapping("/updateCase")
+    public ModelAndView updateCase(@RequestParam Long caseId) {
+        Case newCase = caseRepository.findById(caseId).get();
+        ModelAndView mav = new ModelAndView("addCase");
+        mav.addObject("newCase", newCase);
+        return mav;
+    }
 }
