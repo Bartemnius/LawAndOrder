@@ -55,4 +55,12 @@ public class ClientController {
         clientRepository.deleteById(clientId);
         return "redirect:/clients";
     }
+
+    @GetMapping("/updateClient")
+    public ModelAndView updateClient(@RequestParam Long clientId) {
+        Client newClient = clientRepository.findById(clientId).get();
+        ModelAndView mav = new ModelAndView("addClient");
+        mav.addObject("newClient", newClient);
+        return mav;
+    }
 }

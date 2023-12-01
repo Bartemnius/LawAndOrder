@@ -27,7 +27,7 @@
                         <th>Last Name</th>
                         <th>Home address</th>
                         <th>Phone number</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,7 +37,8 @@
                         <td th:text="${client.homeAddress}"></td>
                         <td th:text="${client.phoneNumber}"></td>
                         <td>
-                            <a th:href="@{/deleteClient(clientId=${client.clientId})}">Delete</a>
+                            <a class="btn btn-primary" th:href="@{/updateClient(clientId=${client.clientId})}">Update</a>
+                            <a class="btn btn-danger" th:href="@{/deleteClient(clientId=${client.clientId})}">Delete</a>
                         </td>
                     </tr>
                     </tbody>
