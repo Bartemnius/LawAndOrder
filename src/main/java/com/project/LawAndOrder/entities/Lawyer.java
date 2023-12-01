@@ -23,9 +23,7 @@ public class Lawyer {
     )
     private Long lawyerId;
 
-    @NotBlank
     private String firstName;
-    @NotBlank
     private String lastName;
 
     private String company;

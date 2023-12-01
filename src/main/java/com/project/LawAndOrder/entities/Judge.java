@@ -23,8 +23,6 @@ public class Judge {
     )
     private Long judgeId;
 
-    @NotBlank
     private String firstName;
-    @NotBlank
     private String lastName;
 }

@@ -27,6 +27,7 @@
                         <th>Last Name</th>
                         <th>Home address</th>
                         <th>Phone number</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,9 @@
                         <td th:text="${client.lastName}"></td>
                         <td th:text="${client.homeAddress}"></td>
                         <td th:text="${client.phoneNumber}"></td>
+                        <td>
+                            <a th:href="@{/deleteClient(clientId=${client.clientId})}">Delete</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

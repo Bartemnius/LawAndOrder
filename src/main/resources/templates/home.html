@@ -35,10 +35,10 @@
                     <tbody>
                     <tr th:each="case : ${caseList}">
                         <td th:text="${case.description}"></td>
-                        <td th:text="${case.client.firstName + ' ' + case.client.lastName}"></td>
-                        <td th:text="${case.court.name}"></td>
-                        <td th:text="${case.judge.firstName + ' ' + case.judge.lastName}"></td>
-                        <td th:text="${case.lawyer.firstName + ' ' + case.lawyer.lastName}"></td>
+                        <td th:text="${case.client}? ${case.client.firstName + ' ' + case.client.lastName} : 'There is no client assigned'"></td>
+                        <td th:text="${case.court}?  ${case.court.name} : 'There is no court selected'"></td>
+                        <td th:text="${case.judge}? ${case.judge.firstName + ' ' + case.judge.lastName} : 'There is no judge assigned'"></td>
+                        <td th:text="${case.lawyer}? ${case.lawyer.firstName + ' ' + case.lawyer.lastName} : 'There is no lawyer assigned'"></td>
                     </tr>
                     </tbody>
                 </table>

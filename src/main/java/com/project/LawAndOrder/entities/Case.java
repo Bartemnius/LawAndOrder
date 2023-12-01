@@ -16,15 +16,20 @@ import lombok.NoArgsConstructor;
 public class Case {
 
     @Id
+    @SequenceGenerator(
+            name = "case_sequence",
+            sequenceName = "case_sequence",
+            allocationSize = 1
+    )
     @GeneratedValue(
-            strategy = GenerationType.AUTO
+            strategy = GenerationType.SEQUENCE,
+            generator = "case_sequence"
     )
     private Long caseId;
 
     private String description;
 
     @ManyToOne(
-            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @JoinColumn(
@@ -34,7 +39,6 @@ public class Case {
     private Client client;
 
     @ManyToOne(
-            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @JoinColumn(
@@ -44,7 +48,6 @@ public class Case {
     private Court court;
 
     @ManyToOne(
-            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @JoinColumn(
@@ -54,8 +57,7 @@ public class Case {
     private Judge judge;
 
     @ManyToOne(
-            cascade = CascadeType.ALL
-
+        fetch = FetchType.LAZY
     )
     @JoinColumn(
             name = "lawyer_id",

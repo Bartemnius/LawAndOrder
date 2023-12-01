@@ -6,12 +6,11 @@ import com.project.LawAndOrder.repositories.CaseRepository;
 import com.project.LawAndOrder.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This is a client controller page.
@@ -21,6 +20,8 @@ import java.util.List;
 public class ClientController {
     @Autowired
     ClientRepository clientRepository;
+    @Autowired
+    CaseRepository caseRepository;
 
     @GetMapping({"/clients"})
     public ModelAndView getClientPage() {
@@ -41,6 +42,17 @@ public class ClientController {
     @PostMapping("addClient")
     public String saveClient(@ModelAttribute Client newClient) {
         clientRepository.save(newClient);
+        return "redirect:/clients";
+    }
+
+    @GetMapping("/deleteClient")
+    public String deleteClient(@RequestParam Long clientId) {
+        Optional<Client> client = clientRepository.findById(clientId);
+        List<Case> cases = caseRepository.findAll();
+        cases.forEach(aCase -> {
+            if(aCase.getClient() == client.get()) aCase.setClient(null);
+        });
+        clientRepository.deleteById(clientId);
         return "redirect:/clients";
     }
 }

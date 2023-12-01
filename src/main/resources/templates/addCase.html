@@ -16,7 +16,7 @@
 <!--choose from clients-->
         <select class="form-select" th:field="*{client}">
             <option value="">Choose client..</option>
-            <option th:each="customer: ${clients}" th:value="${customer.clientId}" th:text="${customer.firstName + ' ' + customer.lastName}" />
+            <option th:each="client: ${clients}" th:value="${client.clientId}" th:text="${client.firstName + ' ' + client.lastName}" />
         </select>
 <!--choose from courts-->
         <select class="form-select" th:field="*{court}">
