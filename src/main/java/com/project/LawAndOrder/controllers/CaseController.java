@@ -73,6 +73,17 @@ public class CaseController {
         Case newCase = caseRepository.findById(caseId).get();
         ModelAndView mav = new ModelAndView("addCase");
         mav.addObject("newCase", newCase);
+
+        List<Client> clients = clientRepository.findAll();
+        List<Court> courts = courtRepository.findAll();
+        List<Judge> judges = judgeRepository.findAll();
+        List<Lawyer> lawyers = lawyerRepository.findAll();
+
+        mav.addObject("clients", clients);
+        mav.addObject("courts", courts);
+        mav.addObject("judges", judges);
+        mav.addObject("lawyers", lawyers);
+
         return mav;
     }
 }
